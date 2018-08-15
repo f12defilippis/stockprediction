@@ -53,7 +53,7 @@ public class AverageTrueRangeService {
 			trueRange = lowTMinusCloseY > trueRange ? lowTMinusCloseY : trueRange;
 		}else
 		{
-			trueRange = Math.abs(today.getMaxValue()-yesterday.getValue());
+			trueRange = highMinusLow;
 		}
 		
 		return trueRange;
