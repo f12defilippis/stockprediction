@@ -34,11 +34,30 @@ public class QuoteService {
 		
 	}
 	
+	public Double getMaxofMaxValues(List<Quote> quotes)
+	{
+
+		Double max = 0.0;
+		
+		for(Quote quote : quotes)
+		{
+			max = quote.getMaxValue() > max ? quote.getMaxValue() : max;
+		}
+		
+		return max;
+		
+	}
+	
+	
+	
 	//TODO return the last howManyDays quotes
 	public List<Quote> getLastNQuotesUntilDate(Date date, int howManyDays)
 	{
 		return null;
 	}
+	
+	
+	
 	
 	
 	
