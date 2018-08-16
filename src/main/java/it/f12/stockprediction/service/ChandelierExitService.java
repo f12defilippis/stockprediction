@@ -32,7 +32,7 @@ public class ChandelierExitService {
 		
 		Double exit = 0.0;
 		
-		List<Quote> quotes = quoteService.getLastNQuotesUntilDate(quote.getDateOfQuote(), numDays);
+		List<Quote> quotes = quoteService.getLastNQuotesUntilDateOfQuote(quote, numDays);
 
 		Double max = quoteService.getMaxofMaxValues(quotes);
 		

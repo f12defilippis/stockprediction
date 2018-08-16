@@ -18,7 +18,7 @@ public class AverageTrueRangeService {
 	{
 		Double atr = 0.0;
 
-		List<Quote> quotes = quoteService.getLastNQuotesUntilDate(quote.getDateOfQuote(), howManyDays);
+		List<Quote> quotes = quoteService.getLastNQuotesUntilDateOfQuote(quote, howManyDays);
 
 		double [] trueRanges = new double[quotes.size()];
 

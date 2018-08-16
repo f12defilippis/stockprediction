@@ -48,15 +48,40 @@ public class QuoteService {
 		
 	}
 	
+	public Double getMinofMinValues(List<Quote> quotes)
+	{
+
+		Double min = quotes.get(0).getMinValue();
+		
+		for(Quote quote : quotes)
+		{
+			min = quote.getMaxValue() < min ? quote.getMaxValue() : min;
+		}
+		
+		return min;
+		
+	}
+	
 	
 	
 	//TODO return the last howManyDays quotes
-	public List<Quote> getLastNQuotesUntilDate(Date date, int howManyDays)
+	public List<Quote> getLastNQuotesUntilDateOfQuote(Quote quote, int howManyDays)
 	{
 		return null;
 	}
 	
+	//TODO return the EMA
+	public Double getEma(Quote quote)
+	{
+		return null;
+	}
 	
+	//TODO return the Kama
+	public Double getKama(Quote quote)
+	{
+		return null;
+	}
+
 	
 	
 	
