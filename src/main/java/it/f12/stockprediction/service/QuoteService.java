@@ -48,6 +48,21 @@ public class QuoteService {
 		
 	}
 	
+	public Double getMaxofQuoteValues(List<Quote> quotes)
+	{
+
+		Double max = 0.0;
+		
+		for(Quote quote : quotes)
+		{
+			max = quote.getValue() > max ? quote.getValue() : max;
+		}
+		
+		return max;
+		
+	}	
+	
+	
 	public Double getMinofMinValues(List<Quote> quotes)
 	{
 
@@ -56,6 +71,20 @@ public class QuoteService {
 		for(Quote quote : quotes)
 		{
 			min = quote.getMaxValue() < min ? quote.getMaxValue() : min;
+		}
+		
+		return min;
+		
+	}
+	
+	public Double getMinofQuoteValues(List<Quote> quotes)
+	{
+
+		Double min = quotes.get(0).getValue();
+		
+		for(Quote quote : quotes)
+		{
+			min = quote.getValue() < min ? quote.getValue() : min;
 		}
 		
 		return min;

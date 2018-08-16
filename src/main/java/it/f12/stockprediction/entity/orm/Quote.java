@@ -35,6 +35,8 @@ public class Quote implements Serializable {
     private Double maxValue;
     @Column(precision=3,name="open_value")
     private Double openValue;
+    @Column(precision=3,name="open_value")
+    private Double volume;
     
     
     @OneToMany(mappedBy="quote")
@@ -250,6 +252,14 @@ public class Quote implements Serializable {
 
 	public void setOpenValue(Double openValue) {
 		this.openValue = openValue;
+	}
+
+	public Double getVolume() {
+		return volume;
+	}
+
+	public void setVolume(Double volume) {
+		this.volume = volume;
 	}
 
 }
