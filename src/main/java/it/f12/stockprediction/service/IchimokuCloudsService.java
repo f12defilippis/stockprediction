@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import it.f12.stockprediction.orm.entity.Quote;
+import it.f12.stockprediction.entity.orm.Quote;
 
 @Service
 public class IchimokuCloudsService {

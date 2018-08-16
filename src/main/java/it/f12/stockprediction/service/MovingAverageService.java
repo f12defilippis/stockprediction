@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import it.f12.stockprediction.orm.entity.Quote;
+import it.f12.stockprediction.entity.orm.Quote;
 
 @Service
 public class MovingAverageService {
@@ -31,6 +31,21 @@ public class MovingAverageService {
 		return sma;
 	}
 
+	public Double calculateSMAUE(Quote quote, int howManyDays, double perc)
+	{
+		Double sma = calculateSMA(quote, howManyDays);
+		
+		return sma + (sma * perc / 100);
+	}
+	
+	public Double calculateSMALE(Quote quote, int howManyDays, double perc)
+	{
+		Double sma = calculateSMA(quote, howManyDays);
+		
+		return sma - (sma * perc / 100);
+	}
+	
+	
 	
 	public Double calculateEMA(Quote quote, int howManyDays)
 	{

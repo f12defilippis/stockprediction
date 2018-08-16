@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import it.f12.stockprediction.orm.entity.Quote;
+import it.f12.stockprediction.entity.orm.Quote;
 
 @Service
 public class QuoteService {
@@ -62,7 +62,11 @@ public class QuoteService {
 		
 	}
 	
-	
+	//TODO return the last howManyDays quotes
+	public List<Quote> getPreviousMonthQuotes(Quote quote)
+	{
+		return null;
+	}	
 	
 	//TODO return the last howManyDays quotes
 	public List<Quote> getLastNQuotesUntilDateOfQuote(Quote quote, int howManyDays)
@@ -82,7 +86,11 @@ public class QuoteService {
 		return null;
 	}
 
-	
+	//TODO return the SAR
+	public Double getSAR(Quote quote, String risingFalling)
+	{
+		return null;
+	}
 	
 	
 	
