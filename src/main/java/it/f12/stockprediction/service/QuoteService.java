@@ -48,6 +48,47 @@ public class QuoteService {
 		
 	}
 	
+	public Integer getIndexMaxofMaxValues(List<Quote> quotes)
+	{
+
+		Integer maxIndex = 0;
+		Double max = 0.0;
+		
+		for(int i = 0; i < quotes.size(); i++)
+		{
+			Quote quote = quotes.get(i);
+			if(quote.getMaxValue() > max)
+			{
+				max = quote.getMaxValue();
+				maxIndex = i;
+			}
+		}
+		
+		return maxIndex;
+		
+	}
+	
+	public Integer getIndexMinofMinValues(List<Quote> quotes)
+	{
+
+		Integer minIndex = 0;
+		Double min = quotes.get(0).getMinValue();;
+		
+		for(int i = 0; i < quotes.size(); i++)
+		{
+			Quote quote = quotes.get(i);
+			if(quote.getMaxValue() < min)
+			{
+				min = quote.getMaxValue();
+				minIndex = i;
+			}
+		}
+		
+		return minIndex;
+		
+	}
+	
+	
 	public Double getMaxofQuoteValues(List<Quote> quotes)
 	{
 
@@ -121,7 +162,17 @@ public class QuoteService {
 		return null;
 	}
 	
-	
+	//TODO return the ADL
+	public Double getADL(Quote quote)
+	{
+		return null;
+	}
+
+	//TODO return the ADX
+	public Double getADX(Quote quote) {
+		// TODO Auto-generated method stub
+		return null;
+	}	
 	
 	
 }
