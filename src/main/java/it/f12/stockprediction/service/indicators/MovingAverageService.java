@@ -1,10 +1,11 @@
-package it.f12.stockprediction.service;
+package it.f12.stockprediction.service.indicators;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import it.f12.stockprediction.entity.orm.Quote;
+import it.f12.stockprediction.service.QuoteService;
 
 @Service
 public class MovingAverageService {
@@ -30,6 +31,26 @@ public class MovingAverageService {
 		
 		return sma;
 	}
+	
+	public Double calculateSMAVolume(Quote quote, int howManyPeriods)
+	{
+		
+		Double sma = 0.0;
+		Double sum = 0.0;
+		
+		List<Quote> quotes = quoteService.getLastNQuotesUntilDateOfQuote(quote, howManyPeriods);
+		
+		for(Quote q : quotes)
+		{
+			sum += q.getVolume();
+		}
+
+		sma = sum / new Double(howManyPeriods);
+		
+		
+		return sma;
+	}	
+	
 
 	public Double calculateSMAUE(Quote quote, int howManyDays, double perc)
 	{

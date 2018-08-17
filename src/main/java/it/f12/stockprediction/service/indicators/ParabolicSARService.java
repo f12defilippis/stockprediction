@@ -1,4 +1,4 @@
-package it.f12.stockprediction.service;
+package it.f12.stockprediction.service.indicators;
 
 import java.util.List;
 
@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import it.f12.stockprediction.entity.orm.Quote;
+import it.f12.stockprediction.service.QuoteService;
 
 @Service
 public class ParabolicSARService {

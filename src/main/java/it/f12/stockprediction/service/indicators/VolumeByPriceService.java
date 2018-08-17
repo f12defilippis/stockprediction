@@ -1,4 +1,4 @@
-package it.f12.stockprediction.service;
+package it.f12.stockprediction.service.indicators;
 
 import java.util.List;
 
@@ -11,6 +11,7 @@ import com.google.common.collect.TreeRangeMap;
 
 import it.f12.stockprediction.entity.orm.Quote;
 import it.f12.stockprediction.entity.to.VolumeByPriceTO;
+import it.f12.stockprediction.service.QuoteService;
 
 @Service
 public class VolumeByPriceService {
