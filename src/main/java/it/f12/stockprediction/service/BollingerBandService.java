@@ -16,43 +16,50 @@ public class BollingerBandService {
 	private QuoteService quoteService;
 	
 	
-	public Double calculateMiddleBand(List<Quote> quotes)
+	public Double calculateMiddleBand(Quote quote, int howManyDays)
 	{
+
+		List<Quote> quotes = quoteService.getLastNQuotesUntilDateOfQuote(quote, howManyDays);
 		
 		List<Double> list = quoteService.getValues(quotes);
-		
 		Double avg = MathUtil.average(list);		
 		return avg;
 	}
-
-	
-
-
 	
 	
-	
-	public Double calculateUpperBand(List<Quote> quotes)
+	public Double calculateUpperBand(Quote quote, int howManyDays)
 	{
-		return calculateBand(quotes, "u");
+		return calculateBand(quote, "u", howManyDays);
 	}
 
-	public Double calculateLowerBand(List<Quote> quotes)
+	public Double calculateLowerBand(Quote quote, int howManyDays)
 	{
-		return calculateBand(quotes, "l");
+		return calculateBand(quote, "l", howManyDays);
 	}
 	
-	
-	
-	private Double calculateBand(List<Quote> quotes, String ul)
+	public Double calculateBandWidth(Quote quote, int howManyDays)
 	{
+		Double bw = ( (calculateUpperBand(quote, howManyDays) - calculateLowerBand(quote, howManyDays)) / calculateMiddleBand(quote, howManyDays)) * 100.0;
+		return bw;
+	}
+	
+	public Double calculateBIndicator(Quote quote, int howManyDays)
+	{
+		Double b = (quote.getValue() - calculateLowerBand(quote, howManyDays))/(calculateUpperBand(quote, howManyDays) - calculateLowerBand(quote, howManyDays));
+		return b;
+	}
+	
+	private Double calculateBand(Quote quote, String ul, int howManyDays)
+	{
+		List<Quote> quotes = quoteService.getLastNQuotesUntilDateOfQuote(quote, howManyDays);
 		Double band = 0.0;
 		
 		StandardDeviation sd = new StandardDeviation();
 		double stddev = sd.evaluate(quoteService.getValuesArray(quotes));
 		if(ul.equals("u"))
-			band = calculateMiddleBand(quotes) + (stddev * 2);
+			band = calculateMiddleBand(quote,howManyDays) + (stddev * 2);
 		else
-			band = calculateMiddleBand(quotes) - (stddev * 2);
+			band = calculateMiddleBand(quote,howManyDays) - (stddev * 2);
 			
 		return band;
 	}
