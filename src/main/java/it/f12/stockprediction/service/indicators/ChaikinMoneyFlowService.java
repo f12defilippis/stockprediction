@@ -26,8 +26,8 @@ public class ChaikinMoneyFlowService {
 		
 		for(Quote q : quotes)
 		{
-			totalMoneyFlowVolume += calculateMoneyFlowVolume(quote);
-			totalVolume += quote.getVolume();
+			totalMoneyFlowVolume += calculateMoneyFlowVolume(q);
+			totalVolume += q.getVolume();
 		}
 		
 		cmf = totalMoneyFlowVolume / totalVolume;

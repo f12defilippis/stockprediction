@@ -16,7 +16,9 @@ import javax.persistence.ManyToOne;
 @Entity(name="quote_indicator")
 public class QuoteIndicator implements Serializable {
 
-    /** Primary key. */
+	private static final long serialVersionUID = -5160308849751421325L;
+
+	/** Primary key. */
     protected static final String PK = "id";
 
     @Id

@@ -4,13 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import it.f12.stockprediction.entity.orm.Quote;
-import it.f12.stockprediction.service.QuoteService;
 
 @Service
 public class KeltnerChannelsService {
 
-	@Autowired
-	private QuoteService quoteService;
 	
 	@Autowired
 	private AverageTrueRangeService averageTrueRangeService;

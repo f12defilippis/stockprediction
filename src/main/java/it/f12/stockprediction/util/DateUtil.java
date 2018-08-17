@@ -1,5 +1,7 @@
 package it.f12.stockprediction.util;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -23,6 +25,19 @@ public class DateUtil {
 	public static String format(Date date) {
 		SimpleDateFormat dt1 = new SimpleDateFormat("yyyyy-mm-dd");
 		return dt1.format(date);
+	}
+	
+	public static Date format(String data) {
+		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = null;
+		if (data == null || data.matches("0*\\.0*\\.0*"))
+			return null;
+		try {
+			date = (Date) formatter.parse(data);
+		} catch (ParseException e) {
+			//System.out.println(e.getMessage());
+		}
+		return date;
 	}
 
 }

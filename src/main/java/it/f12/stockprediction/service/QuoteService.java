@@ -1,16 +1,20 @@
 package it.f12.stockprediction.service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import it.f12.stockprediction.entity.orm.Quote;
+import it.f12.stockprediction.entity.repository.QuoteRepository;
 
 @Service
 public class QuoteService {
 
+	@Autowired
+	private QuoteRepository quoteRepository;
+	
 	
 	public List<Double> getValues(List<Quote> quotes)
 	{
@@ -139,9 +143,11 @@ public class QuoteService {
 	}	
 	
 	//TODO return the last howManyDays quotes
-	public List<Quote> getLastNQuotesUntilDateOfQuote(Quote quote, int howManyDays)
+	public List<Quote> getLastNQuotesUntilDateOfQuote(Quote quote, int howMany)
 	{
-		return null;
+		List<Quote> quotes = quoteRepository.getLastNQuotesUntilDateOfQuote(quote.getDateOfQuote(), quote.getStock(), howMany);
+		
+		return quotes;
 	}
 	
 	//TODO return the EMA

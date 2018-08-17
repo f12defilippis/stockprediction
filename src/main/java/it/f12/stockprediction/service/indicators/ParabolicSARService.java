@@ -37,7 +37,7 @@ public class ParabolicSARService {
 			for(Quote q : quotes)
 			{
 				EpObject epoInternal = new EpObject();
-				epoInternal = calculateEP(quote, howManyDays);
+				epoInternal = calculateEP(q, howManyDays);
 				if(epoInternal.ep > epo.ep)
 				{
 					epo.ep = epoInternal.ep;
@@ -69,8 +69,6 @@ public class ParabolicSARService {
 		EpObject epo = new EpObject();
 		
 		List<Quote> quotes = quoteService.getLastNQuotesUntilDateOfQuote(quote, howManyDays);
-		
-		Double max = 0.0;
 		for(Quote q : quotes)
 		{
 			if(q.getMaxValue() > epo.ep)

@@ -16,7 +16,9 @@ import javax.persistence.ManyToOne;
 @Entity(name="quote_shift")
 public class QuoteShift implements Serializable {
 
-    /** Primary key. */
+	private static final long serialVersionUID = 4255288667052656349L;
+
+	/** Primary key. */
     protected static final String PK = "id";
 
     @Id

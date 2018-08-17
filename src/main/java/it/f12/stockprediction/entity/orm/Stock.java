@@ -17,7 +17,9 @@ import javax.persistence.OneToMany;
 @Entity(name="stock")
 public class Stock implements Serializable {
 
-    /** Primary key. */
+	private static final long serialVersionUID = 4314715426528330175L;
+
+	/** Primary key. */
     protected static final String PK = "id";
 
     @Id
@@ -36,6 +38,12 @@ public class Stock implements Serializable {
         super();
     }
 
+    public Stock(int pid) {
+        super();
+        id = pid;
+    }    
+    
+    
     /**
      * Access method for id.
      *

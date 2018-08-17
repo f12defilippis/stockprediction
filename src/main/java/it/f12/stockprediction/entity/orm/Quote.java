@@ -3,13 +3,15 @@
 package it.f12.stockprediction.entity.orm;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,14 +20,17 @@ import javax.persistence.OneToMany;
 @Entity(name="quote")
 public class Quote implements Serializable {
 
-    /** Primary key. */
+	private static final long serialVersionUID = -4947596816502876245L;
+
+	/** Primary key. */
     protected static final String PK = "id";
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(unique=true, nullable=false, length=10)
     private int id;
     @Column(name="date_of_quote")
-    private Timestamp dateOfQuote;
+    private Date dateOfQuote;
     @Column(precision=3)
     private Double value;
 
@@ -70,23 +75,7 @@ public class Quote implements Serializable {
         id = aId;
     }
 
-    /**
-     * Access method for dateOfQuote.
-     *
-     * @return the current value of dateOfQuote
-     */
-    public Timestamp getDateOfQuote() {
-        return dateOfQuote;
-    }
 
-    /**
-     * Setter method for dateOfQuote.
-     *
-     * @param aDateOfQuote the new value for dateOfQuote
-     */
-    public void setDateOfQuote(Timestamp aDateOfQuote) {
-        dateOfQuote = aDateOfQuote;
-    }
 
     /**
      * Access method for value.
@@ -260,6 +249,14 @@ public class Quote implements Serializable {
 
 	public void setVolume(Double volume) {
 		this.volume = volume;
+	}
+
+	public Date getDateOfQuote() {
+		return dateOfQuote;
+	}
+
+	public void setDateOfQuote(Date dateOfQuote) {
+		this.dateOfQuote = dateOfQuote;
 	}
 
 }
