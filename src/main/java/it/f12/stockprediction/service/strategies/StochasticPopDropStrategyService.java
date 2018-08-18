@@ -7,6 +7,7 @@ import it.f12.stockprediction.entity.orm.Quote;
 import it.f12.stockprediction.service.QuoteService;
 import it.f12.stockprediction.service.indicators.ADXService;
 import it.f12.stockprediction.service.indicators.MovingAverageService;
+import it.f12.stockprediction.service.indicators.PivotPointsService;
 import it.f12.stockprediction.service.indicators.StochasticService;
 import it.f12.stockprediction.util.DateUtil;
 
@@ -25,8 +26,8 @@ public class StochasticPopDropStrategyService {
 	@Autowired
 	private QuoteService quoteService;
 	
-//	@Autowired
-//	private PivotPointsService pivotPointsService;
+	@Autowired
+	private PivotPointsService pivotPointsService;
 
 	
 	public String check(Quote quote)
@@ -59,22 +60,22 @@ public class StochasticPopDropStrategyService {
 						todayStochasticSlowK14 < 20;
 
 		
-//		Double stopLoss = 0.0;				
+		Double stopLoss = 0.0;				
 						
 		if(bullish)
 		{
+			stopLoss = pivotPointsService.calculate(quote).getFibonacciSupport1();
 			System.out.println("BUY SIGNAL with Stochastic Pop Drop: " + quote.getStock().getDescription() + " "
-					+ "Date: " + DateUtil.format(quote.getDateOfQuote()) + " Price: " + quote.getValue());
+					+ "Date: " + DateUtil.format(quote.getDateOfQuote()) + " Price: " + quote.getValue() + " SL: " + stopLoss);
 
 			ret = "BULLISH";
-//			stopLoss = pivotPointsService.calculate(quote).getFibonacciSupport1();
 			
 		}else if(bearish)
 		{
+			stopLoss = pivotPointsService.calculate(quote).getFibonacciResistance1();
 			System.out.println("SELL SIGNAL with Stochastic Pop Drop: " + quote.getStock().getDescription() + " "
-					+ "Date: " + DateUtil.format(quote.getDateOfQuote()) + " Price: " + quote.getValue());
+					+ "Date: " + DateUtil.format(quote.getDateOfQuote()) + " Price: " + quote.getValue() + " SL: " + stopLoss);
 			ret = "BEARISH";
-//			stopLoss = pivotPointsService.calculate(quote).getFibonacciResistance1();
 		}
 						
 		return ret;

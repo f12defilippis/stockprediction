@@ -23,7 +23,7 @@ public class DateUtil {
 	}
 
 	public static String format(Date date) {
-		SimpleDateFormat dt1 = new SimpleDateFormat("yyyyy-mm-dd");
+		SimpleDateFormat dt1 = new SimpleDateFormat("yyyy-MM-dd");
 		return dt1.format(date);
 	}
 	

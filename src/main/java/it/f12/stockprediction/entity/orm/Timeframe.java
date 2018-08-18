@@ -12,13 +12,13 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-@Entity(name="indicator_type")
-public class IndicatorType implements Serializable {
+@Entity(name="timeframe")
+public class Timeframe implements Serializable {
 
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = 373039898100264486L;
+	private static final long serialVersionUID = -3152443772189388435L;
 
 	/** Primary key. */
     protected static final String PK = "id";
@@ -28,15 +28,20 @@ public class IndicatorType implements Serializable {
     private int id;
     @Column(length=45)
     private String description;
-    @OneToMany(mappedBy="indicatorType")
-    private Set<Indicator> indicator;
+    @OneToMany(mappedBy="timeframe")
+    private Set<Quote> quote;
 
     /** Default constructor. */
-    public IndicatorType() {
+    public Timeframe() {
         super();
     }
 
-    /**
+    public Timeframe(int i) {
+        super();
+        id = i;
+	}
+
+	/**
      * Access method for id.
      *
      * @return the current value of id
@@ -73,37 +78,37 @@ public class IndicatorType implements Serializable {
     }
 
     /**
-     * Access method for indicator.
+     * Access method for quote.
      *
-     * @return the current value of indicator
+     * @return the current value of quote
      */
-    public Set<Indicator> getIndicator() {
-        return indicator;
+    public Set<Quote> getQuote() {
+        return quote;
     }
 
     /**
-     * Setter method for indicator.
+     * Setter method for quote.
      *
-     * @param aIndicator the new value for indicator
+     * @param aQuote the new value for quote
      */
-    public void setIndicator(Set<Indicator> aIndicator) {
-        indicator = aIndicator;
+    public void setQuote(Set<Quote> aQuote) {
+        quote = aQuote;
     }
 
     /**
-     * Compares the key for this instance with another IndicatorType.
+     * Compares the key for this instance with another Timeframe.
      *
      * @param other The object to compare to
-     * @return True if other object is instance of class IndicatorType and the key objects are equal
+     * @return True if other object is instance of class Timeframe and the key objects are equal
      */
     private boolean equalKeys(Object other) {
         if (this==other) {
             return true;
         }
-        if (!(other instanceof IndicatorType)) {
+        if (!(other instanceof Timeframe)) {
             return false;
         }
-        IndicatorType that = (IndicatorType) other;
+        Timeframe that = (Timeframe) other;
         if (this.getId() != that.getId()) {
             return false;
         }
@@ -111,15 +116,15 @@ public class IndicatorType implements Serializable {
     }
 
     /**
-     * Compares this instance with another IndicatorType.
+     * Compares this instance with another Timeframe.
      *
      * @param other The object to compare to
      * @return True if the objects are the same
      */
     @Override
     public boolean equals(Object other) {
-        if (!(other instanceof IndicatorType)) return false;
-        return this.equalKeys(other) && ((IndicatorType)other).equalKeys(this);
+        if (!(other instanceof Timeframe)) return false;
+        return this.equalKeys(other) && ((Timeframe)other).equalKeys(this);
     }
 
     /**
@@ -143,7 +148,7 @@ public class IndicatorType implements Serializable {
      */
     @Override
     public String toString() {
-        StringBuffer sb = new StringBuffer("[IndicatorType |");
+        StringBuffer sb = new StringBuffer("[Timeframe |");
         sb.append(" id=").append(getId());
         sb.append("]");
         return sb.toString();

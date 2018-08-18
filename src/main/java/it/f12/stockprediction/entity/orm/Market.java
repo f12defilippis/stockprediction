@@ -17,6 +17,9 @@ import javax.persistence.OneToMany;
 @Entity(name="market")
 public class Market implements Serializable {
 
+    /**
+	 * 
+	 */
 	private static final long serialVersionUID = 7295935865993549252L;
 
 	/** Primary key. */

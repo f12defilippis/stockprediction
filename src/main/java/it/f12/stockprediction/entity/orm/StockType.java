@@ -12,13 +12,13 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-@Entity(name="indicator_type")
-public class IndicatorType implements Serializable {
+@Entity(name="stock_type")
+public class StockType implements Serializable {
 
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = 373039898100264486L;
+	private static final long serialVersionUID = -7765475788576372397L;
 
 	/** Primary key. */
     protected static final String PK = "id";
@@ -28,11 +28,11 @@ public class IndicatorType implements Serializable {
     private int id;
     @Column(length=45)
     private String description;
-    @OneToMany(mappedBy="indicatorType")
-    private Set<Indicator> indicator;
+    @OneToMany(mappedBy="stockType")
+    private Set<Stock> stock;
 
     /** Default constructor. */
-    public IndicatorType() {
+    public StockType() {
         super();
     }
 
@@ -73,37 +73,37 @@ public class IndicatorType implements Serializable {
     }
 
     /**
-     * Access method for indicator.
+     * Access method for stock.
      *
-     * @return the current value of indicator
+     * @return the current value of stock
      */
-    public Set<Indicator> getIndicator() {
-        return indicator;
+    public Set<Stock> getStock() {
+        return stock;
     }
 
     /**
-     * Setter method for indicator.
+     * Setter method for stock.
      *
-     * @param aIndicator the new value for indicator
+     * @param aStock the new value for stock
      */
-    public void setIndicator(Set<Indicator> aIndicator) {
-        indicator = aIndicator;
+    public void setStock(Set<Stock> aStock) {
+        stock = aStock;
     }
 
     /**
-     * Compares the key for this instance with another IndicatorType.
+     * Compares the key for this instance with another StockType.
      *
      * @param other The object to compare to
-     * @return True if other object is instance of class IndicatorType and the key objects are equal
+     * @return True if other object is instance of class StockType and the key objects are equal
      */
     private boolean equalKeys(Object other) {
         if (this==other) {
             return true;
         }
-        if (!(other instanceof IndicatorType)) {
+        if (!(other instanceof StockType)) {
             return false;
         }
-        IndicatorType that = (IndicatorType) other;
+        StockType that = (StockType) other;
         if (this.getId() != that.getId()) {
             return false;
         }
@@ -111,15 +111,15 @@ public class IndicatorType implements Serializable {
     }
 
     /**
-     * Compares this instance with another IndicatorType.
+     * Compares this instance with another StockType.
      *
      * @param other The object to compare to
      * @return True if the objects are the same
      */
     @Override
     public boolean equals(Object other) {
-        if (!(other instanceof IndicatorType)) return false;
-        return this.equalKeys(other) && ((IndicatorType)other).equalKeys(this);
+        if (!(other instanceof StockType)) return false;
+        return this.equalKeys(other) && ((StockType)other).equalKeys(this);
     }
 
     /**
@@ -143,7 +143,7 @@ public class IndicatorType implements Serializable {
      */
     @Override
     public String toString() {
-        StringBuffer sb = new StringBuffer("[IndicatorType |");
+        StringBuffer sb = new StringBuffer("[StockType |");
         sb.append(" id=").append(getId());
         sb.append("]");
         return sb.toString();

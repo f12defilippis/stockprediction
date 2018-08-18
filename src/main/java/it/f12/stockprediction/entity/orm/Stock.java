@@ -17,7 +17,10 @@ import javax.persistence.OneToMany;
 @Entity(name="stock")
 public class Stock implements Serializable {
 
-	private static final long serialVersionUID = 4314715426528330175L;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2016081319619414018L;
 
 	/** Primary key. */
     protected static final String PK = "id";
@@ -32,19 +35,22 @@ public class Stock implements Serializable {
     @ManyToOne(optional=false)
     @JoinColumn(name="market", nullable=false)
     private Market market;
+    @ManyToOne(optional=false)
+    @JoinColumn(name="stock_type", nullable=false)
+    private StockType stockType;
 
     /** Default constructor. */
     public Stock() {
         super();
     }
 
-    public Stock(int pid) {
-        super();
-        id = pid;
-    }    
-    
-    
-    /**
+    public Stock(int i) {
+		// TODO Auto-generated constructor stub
+    	super();
+    	id = i;
+	}
+
+	/**
      * Access method for id.
      *
      * @return the current value of id
@@ -114,6 +120,24 @@ public class Stock implements Serializable {
      */
     public void setMarket(Market aMarket) {
         market = aMarket;
+    }
+
+    /**
+     * Access method for stockType.
+     *
+     * @return the current value of stockType
+     */
+    public StockType getStockType() {
+        return stockType;
+    }
+
+    /**
+     * Setter method for stockType.
+     *
+     * @param aStockType the new value for stockType
+     */
+    public void setStockType(StockType aStockType) {
+        stockType = aStockType;
     }
 
     /**

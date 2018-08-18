@@ -11,7 +11,6 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -20,30 +19,35 @@ import javax.persistence.OneToMany;
 @Entity(name="quote")
 public class Quote implements Serializable {
 
-	private static final long serialVersionUID = -4947596816502876245L;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3702817019385582527L;
 
 	/** Primary key. */
     protected static final String PK = "id";
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(unique=true, nullable=false, length=10)
+    @GeneratedValue(strategy = javax.persistence.GenerationType.AUTO )
     private int id;
     @Column(name="date_of_quote")
     private Date dateOfQuote;
-    @Column(precision=3)
+    @Column(precision=22)
     private Double value;
-
-    @Column(precision=3,name="min_value")
-    private Double minValue;
-    @Column(precision=3,name="max_value")
-    private Double maxValue;
-    @Column(precision=3,name="open_value")
-    private Double openValue;
-    @Column(precision=3,name="open_value")
-    private Double volume;
+    @Column(name="max_value", precision=22)
+    private double maxValue;
+    @Column(name="min_value", precision=22)
+    private double minValue;
+    @Column(name="open_value", precision=22)
+    private double openValue;
+    @Column(precision=22)
+    private double volume;
     
     
+    
+    @OneToMany(mappedBy="quote")
+    private Set<Position> position;
     @OneToMany(mappedBy="quote")
     private Set<QuoteIndicator> quoteIndicator;
     @OneToMany(mappedBy="quote")
@@ -51,6 +55,9 @@ public class Quote implements Serializable {
     @ManyToOne(optional=false)
     @JoinColumn(name="stock", nullable=false)
     private Stock stock;
+    @ManyToOne(optional=false)
+    @JoinColumn(name="timeframe", nullable=false)
+    private Timeframe timeframe;
 
     /** Default constructor. */
     public Quote() {
@@ -77,22 +84,96 @@ public class Quote implements Serializable {
 
 
 
+
+
     /**
-     * Access method for value.
+     * Access method for maxValue.
      *
-     * @return the current value of value
+     * @return the current value of maxValue
      */
-    public Double getValue() {
-        return value;
+    public double getMaxValue() {
+        return maxValue;
     }
 
     /**
-     * Setter method for value.
+     * Setter method for maxValue.
      *
-     * @param aValue the new value for value
+     * @param aMaxValue the new value for maxValue
      */
-    public void setValue(Double aValue) {
-        value = aValue;
+    public void setMaxValue(double aMaxValue) {
+        maxValue = aMaxValue;
+    }
+
+    /**
+     * Access method for minValue.
+     *
+     * @return the current value of minValue
+     */
+    public double getMinValue() {
+        return minValue;
+    }
+
+    /**
+     * Setter method for minValue.
+     *
+     * @param aMinValue the new value for minValue
+     */
+    public void setMinValue(double aMinValue) {
+        minValue = aMinValue;
+    }
+
+    /**
+     * Access method for openValue.
+     *
+     * @return the current value of openValue
+     */
+    public double getOpenValue() {
+        return openValue;
+    }
+
+    /**
+     * Setter method for openValue.
+     *
+     * @param aOpenValue the new value for openValue
+     */
+    public void setOpenValue(double aOpenValue) {
+        openValue = aOpenValue;
+    }
+
+    /**
+     * Access method for volume.
+     *
+     * @return the current value of volume
+     */
+    public double getVolume() {
+        return volume;
+    }
+
+    /**
+     * Setter method for volume.
+     *
+     * @param aVolume the new value for volume
+     */
+    public void setVolume(double aVolume) {
+        volume = aVolume;
+    }
+
+    /**
+     * Access method for position.
+     *
+     * @return the current value of position
+     */
+    public Set<Position> getPosition() {
+        return position;
+    }
+
+    /**
+     * Setter method for position.
+     *
+     * @param aPosition the new value for position
+     */
+    public void setPosition(Set<Position> aPosition) {
+        position = aPosition;
     }
 
     /**
@@ -147,6 +228,24 @@ public class Quote implements Serializable {
      */
     public void setStock(Stock aStock) {
         stock = aStock;
+    }
+
+    /**
+     * Access method for timeframe.
+     *
+     * @return the current value of timeframe
+     */
+    public Timeframe getTimeframe() {
+        return timeframe;
+    }
+
+    /**
+     * Setter method for timeframe.
+     *
+     * @param aTimeframe the new value for timeframe
+     */
+    public void setTimeframe(Timeframe aTimeframe) {
+        timeframe = aTimeframe;
     }
 
     /**
@@ -219,36 +318,12 @@ public class Quote implements Serializable {
         return ret;
     }
 
-	public Double getMinValue() {
-		return minValue;
+	public Double getValue() {
+		return value;
 	}
 
-	public void setMinValue(Double minValue) {
-		this.minValue = minValue;
-	}
-
-	public Double getMaxValue() {
-		return maxValue;
-	}
-
-	public void setMaxValue(Double maxValue) {
-		this.maxValue = maxValue;
-	}
-
-	public Double getOpenValue() {
-		return openValue;
-	}
-
-	public void setOpenValue(Double openValue) {
-		this.openValue = openValue;
-	}
-
-	public Double getVolume() {
-		return volume;
-	}
-
-	public void setVolume(Double volume) {
-		this.volume = volume;
+	public void setValue(Double value) {
+		this.value = value;
 	}
 
 	public Date getDateOfQuote() {

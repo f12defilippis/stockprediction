@@ -17,6 +17,9 @@ import javax.persistence.OneToMany;
 @Entity(name="indicator")
 public class Indicator implements Serializable {
 
+    /**
+	 * 
+	 */
 	private static final long serialVersionUID = 4062875549961426811L;
 
 	/** Primary key. */

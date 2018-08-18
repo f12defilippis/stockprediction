@@ -12,13 +12,13 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-@Entity(name="indicator_type")
-public class IndicatorType implements Serializable {
+@Entity(name="parameter")
+public class Parameter implements Serializable {
 
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = 373039898100264486L;
+	private static final long serialVersionUID = -546270641636693568L;
 
 	/** Primary key. */
     protected static final String PK = "id";
@@ -28,11 +28,11 @@ public class IndicatorType implements Serializable {
     private int id;
     @Column(length=45)
     private String description;
-    @OneToMany(mappedBy="indicatorType")
-    private Set<Indicator> indicator;
+    @OneToMany(mappedBy="parameter")
+    private Set<StrategyParameter> strategyParameter;
 
     /** Default constructor. */
-    public IndicatorType() {
+    public Parameter() {
         super();
     }
 
@@ -73,37 +73,37 @@ public class IndicatorType implements Serializable {
     }
 
     /**
-     * Access method for indicator.
+     * Access method for strategyParameter.
      *
-     * @return the current value of indicator
+     * @return the current value of strategyParameter
      */
-    public Set<Indicator> getIndicator() {
-        return indicator;
+    public Set<StrategyParameter> getStrategyParameter() {
+        return strategyParameter;
     }
 
     /**
-     * Setter method for indicator.
+     * Setter method for strategyParameter.
      *
-     * @param aIndicator the new value for indicator
+     * @param aStrategyParameter the new value for strategyParameter
      */
-    public void setIndicator(Set<Indicator> aIndicator) {
-        indicator = aIndicator;
+    public void setStrategyParameter(Set<StrategyParameter> aStrategyParameter) {
+        strategyParameter = aStrategyParameter;
     }
 
     /**
-     * Compares the key for this instance with another IndicatorType.
+     * Compares the key for this instance with another Parameter.
      *
      * @param other The object to compare to
-     * @return True if other object is instance of class IndicatorType and the key objects are equal
+     * @return True if other object is instance of class Parameter and the key objects are equal
      */
     private boolean equalKeys(Object other) {
         if (this==other) {
             return true;
         }
-        if (!(other instanceof IndicatorType)) {
+        if (!(other instanceof Parameter)) {
             return false;
         }
-        IndicatorType that = (IndicatorType) other;
+        Parameter that = (Parameter) other;
         if (this.getId() != that.getId()) {
             return false;
         }
@@ -111,15 +111,15 @@ public class IndicatorType implements Serializable {
     }
 
     /**
-     * Compares this instance with another IndicatorType.
+     * Compares this instance with another Parameter.
      *
      * @param other The object to compare to
      * @return True if the objects are the same
      */
     @Override
     public boolean equals(Object other) {
-        if (!(other instanceof IndicatorType)) return false;
-        return this.equalKeys(other) && ((IndicatorType)other).equalKeys(this);
+        if (!(other instanceof Parameter)) return false;
+        return this.equalKeys(other) && ((Parameter)other).equalKeys(this);
     }
 
     /**
@@ -143,7 +143,7 @@ public class IndicatorType implements Serializable {
      */
     @Override
     public String toString() {
-        StringBuffer sb = new StringBuffer("[IndicatorType |");
+        StringBuffer sb = new StringBuffer("[Parameter |");
         sb.append(" id=").append(getId());
         sb.append("]");
         return sb.toString();

@@ -3,23 +3,24 @@
 package it.f12.stockprediction.entity.orm;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
-@Entity(name="quote_indicator")
-public class QuoteIndicator implements Serializable {
+@Entity(name="strategy_parameter")
+public class StrategyParameter implements Serializable {
 
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = -5160308849751421325L;
+	private static final long serialVersionUID = 5155543364100210257L;
 
 	/** Primary key. */
     protected static final String PK = "id";
@@ -27,17 +28,19 @@ public class QuoteIndicator implements Serializable {
     @Id
     @Column(unique=true, nullable=false, length=10)
     private int id;
-    @Column(precision=3)
-    private BigDecimal value;
+    @Column(nullable=false, precision=22)
+    private double value;
+    @OneToMany(mappedBy="strategyParameter")
+    private Set<Position> position;
     @ManyToOne(optional=false)
-    @JoinColumn(name="indicator", nullable=false)
-    private Indicator indicator;
+    @JoinColumn(name="parameter_id", nullable=false)
+    private Parameter parameter;
     @ManyToOne(optional=false)
-    @JoinColumn(name="quote", nullable=false)
-    private Quote quote;
+    @JoinColumn(name="strategy_id", nullable=false)
+    private Strategy strategy;
 
     /** Default constructor. */
-    public QuoteIndicator() {
+    public StrategyParameter() {
         super();
     }
 
@@ -64,7 +67,7 @@ public class QuoteIndicator implements Serializable {
      *
      * @return the current value of value
      */
-    public BigDecimal getValue() {
+    public double getValue() {
         return value;
     }
 
@@ -73,60 +76,78 @@ public class QuoteIndicator implements Serializable {
      *
      * @param aValue the new value for value
      */
-    public void setValue(BigDecimal aValue) {
+    public void setValue(double aValue) {
         value = aValue;
     }
 
     /**
-     * Access method for indicator.
+     * Access method for position.
      *
-     * @return the current value of indicator
+     * @return the current value of position
      */
-    public Indicator getIndicator() {
-        return indicator;
+    public Set<Position> getPosition() {
+        return position;
     }
 
     /**
-     * Setter method for indicator.
+     * Setter method for position.
      *
-     * @param aIndicator the new value for indicator
+     * @param aPosition the new value for position
      */
-    public void setIndicator(Indicator aIndicator) {
-        indicator = aIndicator;
+    public void setPosition(Set<Position> aPosition) {
+        position = aPosition;
     }
 
     /**
-     * Access method for quote.
+     * Access method for parameter.
      *
-     * @return the current value of quote
+     * @return the current value of parameter
      */
-    public Quote getQuote() {
-        return quote;
+    public Parameter getParameter() {
+        return parameter;
     }
 
     /**
-     * Setter method for quote.
+     * Setter method for parameter.
      *
-     * @param aQuote the new value for quote
+     * @param aParameter the new value for parameter
      */
-    public void setQuote(Quote aQuote) {
-        quote = aQuote;
+    public void setParameter(Parameter aParameter) {
+        parameter = aParameter;
     }
 
     /**
-     * Compares the key for this instance with another QuoteIndicator.
+     * Access method for strategy.
+     *
+     * @return the current value of strategy
+     */
+    public Strategy getStrategy() {
+        return strategy;
+    }
+
+    /**
+     * Setter method for strategy.
+     *
+     * @param aStrategy the new value for strategy
+     */
+    public void setStrategy(Strategy aStrategy) {
+        strategy = aStrategy;
+    }
+
+    /**
+     * Compares the key for this instance with another StrategyParameter.
      *
      * @param other The object to compare to
-     * @return True if other object is instance of class QuoteIndicator and the key objects are equal
+     * @return True if other object is instance of class StrategyParameter and the key objects are equal
      */
     private boolean equalKeys(Object other) {
         if (this==other) {
             return true;
         }
-        if (!(other instanceof QuoteIndicator)) {
+        if (!(other instanceof StrategyParameter)) {
             return false;
         }
-        QuoteIndicator that = (QuoteIndicator) other;
+        StrategyParameter that = (StrategyParameter) other;
         if (this.getId() != that.getId()) {
             return false;
         }
@@ -134,15 +155,15 @@ public class QuoteIndicator implements Serializable {
     }
 
     /**
-     * Compares this instance with another QuoteIndicator.
+     * Compares this instance with another StrategyParameter.
      *
      * @param other The object to compare to
      * @return True if the objects are the same
      */
     @Override
     public boolean equals(Object other) {
-        if (!(other instanceof QuoteIndicator)) return false;
-        return this.equalKeys(other) && ((QuoteIndicator)other).equalKeys(this);
+        if (!(other instanceof StrategyParameter)) return false;
+        return this.equalKeys(other) && ((StrategyParameter)other).equalKeys(this);
     }
 
     /**
@@ -166,7 +187,7 @@ public class QuoteIndicator implements Serializable {
      */
     @Override
     public String toString() {
-        StringBuffer sb = new StringBuffer("[QuoteIndicator |");
+        StringBuffer sb = new StringBuffer("[StrategyParameter |");
         sb.append(" id=").append(getId());
         sb.append("]");
         return sb.toString();

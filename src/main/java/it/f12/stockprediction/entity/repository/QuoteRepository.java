@@ -13,7 +13,7 @@ public interface QuoteRepository extends CrudRepository<Quote, Integer>{
 
 	
 	@Query(nativeQuery = true,
-            value = "SELECT TOP :howMany * FROM Quote a WHERE a.dateOfQuote <= :date and a.stock = :pstock ORDER BY a.dateOfQuote")
+            value = "SELECT * FROM Quote a WHERE a.date_of_quote <= :d and a.stock = :pstock ORDER BY a.date_of_quote desc limit :howMany")
 	List<Quote> getLastNQuotesUntilDateOfQuote(Date d, Stock pstock, Integer howMany);
 	
 	

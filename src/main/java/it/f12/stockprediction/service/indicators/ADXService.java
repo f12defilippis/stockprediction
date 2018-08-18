@@ -33,6 +33,7 @@ public class ADXService {
 			
 			
 			List<AdxTO> listAdxTo = new ArrayList<AdxTO>();
+			
 			for(int i = 1; i < quotes.size() ; i++)
 			{
 				AdxTO to = new AdxTO();
@@ -66,21 +67,23 @@ public class ADXService {
 					to.setDiMinusHMD( 100.0 * to.getDmMinusHMD() / to.getTrHMD() );
 
 					to.setDiDiffHMD( Math.abs(to.getDiPlusHMD() - to.getDiMinusHMD()) );
-					to.setDiSumHMD( to.getDiPlusHMD() - to.getDiMinusHMD() );
+					to.setDiSumHMD( to.getDiPlusHMD() + to.getDiMinusHMD() );
 					
 					to.setDx( 100.0 * to.getDiDiffHMD() / to.getDiSumHMD() );
 					
-					if(i==howManyDays*2)
+					if(i==howManyDays*2-1)
 					{
-						adx = 0.0;
-						for(int j = howManyDays * 2 - 2 ; j > howManyDays * 2 - 2 - howManyDays ; j--)
+						double sadx = 0.0;
+						for(int j = howManyDays * 2 - 3 ; j > howManyDays * 2 - 3 - howManyDays ; j--)
 						{
-							adx += listAdxTo.get(j).getDx();
+							sadx += listAdxTo.get(j).getDx();
 						}
+						adx = sadx / (double)howManyDays;
 						to.setAdx(adx);
 					}
 					
 				}
+				listAdxTo.add(to);
 			}
 		}
 

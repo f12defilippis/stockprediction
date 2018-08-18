@@ -15,6 +15,9 @@ import javax.persistence.OneToMany;
 @Entity(name="country")
 public class Country implements Serializable {
 
+    /**
+	 * 
+	 */
 	private static final long serialVersionUID = -4074460380100377013L;
 
 	/** Primary key. */

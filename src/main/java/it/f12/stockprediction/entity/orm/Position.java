@@ -3,23 +3,24 @@
 package it.f12.stockprediction.entity.orm;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
-@Entity(name="quote_indicator")
-public class QuoteIndicator implements Serializable {
+@Entity(name="position")
+public class Position implements Serializable {
 
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = -5160308849751421325L;
+	private static final long serialVersionUID = -8836791525370800752L;
 
 	/** Primary key. */
     protected static final String PK = "id";
@@ -27,17 +28,20 @@ public class QuoteIndicator implements Serializable {
     @Id
     @Column(unique=true, nullable=false, length=10)
     private int id;
-    @Column(precision=3)
-    private BigDecimal value;
     @ManyToOne(optional=false)
-    @JoinColumn(name="indicator", nullable=false)
-    private Indicator indicator;
+    @JoinColumn(name="action", nullable=false)
+    private Action action;
+    @OneToMany(mappedBy="position")
+    private Set<PositionHistory> positionHistory;
     @ManyToOne(optional=false)
     @JoinColumn(name="quote", nullable=false)
     private Quote quote;
+    @ManyToOne(optional=false)
+    @JoinColumn(name="strategy_parameter", nullable=false)
+    private StrategyParameter strategyParameter;
 
     /** Default constructor. */
-    public QuoteIndicator() {
+    public Position() {
         super();
     }
 
@@ -60,39 +64,39 @@ public class QuoteIndicator implements Serializable {
     }
 
     /**
-     * Access method for value.
+     * Access method for action.
      *
-     * @return the current value of value
+     * @return the current value of action
      */
-    public BigDecimal getValue() {
-        return value;
+    public Action getAction() {
+        return action;
     }
 
     /**
-     * Setter method for value.
+     * Setter method for action.
      *
-     * @param aValue the new value for value
+     * @param aAction the new value for action
      */
-    public void setValue(BigDecimal aValue) {
-        value = aValue;
+    public void setAction(Action aAction) {
+        action = aAction;
     }
 
     /**
-     * Access method for indicator.
+     * Access method for positionHistory.
      *
-     * @return the current value of indicator
+     * @return the current value of positionHistory
      */
-    public Indicator getIndicator() {
-        return indicator;
+    public Set<PositionHistory> getPositionHistory() {
+        return positionHistory;
     }
 
     /**
-     * Setter method for indicator.
+     * Setter method for positionHistory.
      *
-     * @param aIndicator the new value for indicator
+     * @param aPositionHistory the new value for positionHistory
      */
-    public void setIndicator(Indicator aIndicator) {
-        indicator = aIndicator;
+    public void setPositionHistory(Set<PositionHistory> aPositionHistory) {
+        positionHistory = aPositionHistory;
     }
 
     /**
@@ -114,19 +118,37 @@ public class QuoteIndicator implements Serializable {
     }
 
     /**
-     * Compares the key for this instance with another QuoteIndicator.
+     * Access method for strategyParameter.
+     *
+     * @return the current value of strategyParameter
+     */
+    public StrategyParameter getStrategyParameter() {
+        return strategyParameter;
+    }
+
+    /**
+     * Setter method for strategyParameter.
+     *
+     * @param aStrategyParameter the new value for strategyParameter
+     */
+    public void setStrategyParameter(StrategyParameter aStrategyParameter) {
+        strategyParameter = aStrategyParameter;
+    }
+
+    /**
+     * Compares the key for this instance with another Position.
      *
      * @param other The object to compare to
-     * @return True if other object is instance of class QuoteIndicator and the key objects are equal
+     * @return True if other object is instance of class Position and the key objects are equal
      */
     private boolean equalKeys(Object other) {
         if (this==other) {
             return true;
         }
-        if (!(other instanceof QuoteIndicator)) {
+        if (!(other instanceof Position)) {
             return false;
         }
-        QuoteIndicator that = (QuoteIndicator) other;
+        Position that = (Position) other;
         if (this.getId() != that.getId()) {
             return false;
         }
@@ -134,15 +156,15 @@ public class QuoteIndicator implements Serializable {
     }
 
     /**
-     * Compares this instance with another QuoteIndicator.
+     * Compares this instance with another Position.
      *
      * @param other The object to compare to
      * @return True if the objects are the same
      */
     @Override
     public boolean equals(Object other) {
-        if (!(other instanceof QuoteIndicator)) return false;
-        return this.equalKeys(other) && ((QuoteIndicator)other).equalKeys(this);
+        if (!(other instanceof Position)) return false;
+        return this.equalKeys(other) && ((Position)other).equalKeys(this);
     }
 
     /**
@@ -166,7 +188,7 @@ public class QuoteIndicator implements Serializable {
      */
     @Override
     public String toString() {
-        StringBuffer sb = new StringBuffer("[QuoteIndicator |");
+        StringBuffer sb = new StringBuffer("[Position |");
         sb.append(" id=").append(getId());
         sb.append("]");
         return sb.toString();

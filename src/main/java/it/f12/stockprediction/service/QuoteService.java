@@ -1,6 +1,7 @@
 package it.f12.stockprediction.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -146,7 +147,7 @@ public class QuoteService {
 	public List<Quote> getLastNQuotesUntilDateOfQuote(Quote quote, int howMany)
 	{
 		List<Quote> quotes = quoteRepository.getLastNQuotesUntilDateOfQuote(quote.getDateOfQuote(), quote.getStock(), howMany);
-		
+		Collections.reverse(quotes);
 		return quotes;
 	}
 	
